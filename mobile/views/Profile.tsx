@@ -1,16 +1,22 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Button, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
-import {Link} from 'react-router-native';
+import {useHistory} from 'react-router-native';
+import Nav from '../components/Nav';
 import {getProfile} from '../helpers/auth';
 
+const logout = () => {
+    AsyncStorage.clear();
+};
+
 const Profile = () => {
+    const history = useHistory();
     const [profile, setProfile] = useState({
         name: '',
         bio: '',
         stars: -1,
     });
-    const stars: JSX.Element[] = [];
 
     useEffect(() => {
         const setProfileData = async () => {
@@ -22,9 +28,7 @@ const Profile = () => {
 
     return (
         <View>
-            <Link to="/">
-                <Text>Back</Text>
-            </Link>
+            <Nav />
             <View style={styles.div}>
                 <Icon
                     name={profile.stars >= 1 ? 'star' : 'staro'}
@@ -52,9 +56,14 @@ const Profile = () => {
                     color="#ccc"
                 />
             </View>
-
             <Text>{profile.name}</Text>
             <Text>{profile.bio}</Text>
+            <Button
+                onPress={() => {
+                    history.push('/');
+                    logout();
+                }}
+                title="Logout"></Button>
         </View>
     );
 };

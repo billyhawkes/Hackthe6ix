@@ -15,6 +15,9 @@ import Register from './views/Register';
 import {NativeRouter, Route} from 'react-router-native';
 import Login from './views/Login';
 import Profile from './views/Profile';
+import Feed from './views/Feed';
+import CreateListing from './views/CreateListing';
+import User from './views/User';
 
 const App = () => {
     return (
@@ -32,8 +35,17 @@ const App = () => {
             <Route path="/login">
                 <Login />
             </Route>
-            <Route path="/user">
+            <Route path="/profile">
                 <Profile />
+            </Route>
+            <Route path="/user/:id">
+                <User />
+            </Route>
+            <Route path="/feed">
+                <Feed />
+            </Route>
+            <Route path="/listing/create">
+                <CreateListing />
             </Route>
         </NativeRouter>
     );

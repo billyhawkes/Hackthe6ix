@@ -1,11 +1,12 @@
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
 import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
-import {Link} from 'react-router-native';
+import {Link, useHistory} from 'react-router-native';
 import {login} from '../helpers/auth';
 import {formStyles} from './Register';
 
 const Register = () => {
+    const history = useHistory();
     const {
         control,
         handleSubmit,
@@ -19,9 +20,7 @@ const Register = () => {
 
     return (
         <View>
-            <Link to="/">
-                <Text>Back</Text>
-            </Link>
+            <Button onPress={() => history.push('/')} title="Back" />
             <Text>Email</Text>
             <Controller
                 control={control}

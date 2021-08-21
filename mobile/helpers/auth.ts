@@ -9,15 +9,15 @@ interface registerBody {
     passwordCheck: string;
 }
 export const register = async (registerBody: registerBody) => {
-    if (registerBody.password !== registerBody.passwordCheck) {
-        try {
-            const res = await axios.post('/register', registerBody);
-            const data = await res.data;
-            await AsyncStorage.setItem('user_id', data.user_id);
-        } catch (err) {
-            console.log('Register error');
-        }
-    }
+    // if (registerBody.password !== registerBody.passwordCheck) {
+    //     try {
+    //         const res = await axios.post('/register', registerBody);
+    //         const data = await res.data;
+    //         await AsyncStorage.setItem('user_id', data.user_id);
+    //     } catch (err) {
+    //         console.log('Register error');
+    //     }
+    // }
 };
 
 interface loginBody {
@@ -37,7 +37,7 @@ export const login = async (loginBody: loginBody) => {
 export const getProfile = async () => {
     // const userId = await getUserId();
     // if (userId) {
-    //     const res = await axios.get('/user', {headers: {user_id: userId}});
+    //     const res = await axios.get('/profile', {headers: {user_id: userId}});
     //     const data = res.data;
     //     return data;
     // }
