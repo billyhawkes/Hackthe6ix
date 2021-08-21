@@ -4,6 +4,9 @@ import {StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import {useParams} from 'react-router-native';
 import Nav from '../components/Nav';
+import {profileStyles} from './Profile';
+import Icon2 from 'react-native-vector-icons/MaterialIcons';
+import Stars from '../components/Stars';
 
 const getUser = async (id: number) => {
     // const res = await axios.get('/user', {headers: {user_id: id}});
@@ -33,38 +36,15 @@ const User = () => {
     }, []);
 
     return (
-        <View>
+        <>
             <Nav />
-            <View style={styles.div}>
-                <Icon
-                    name={user.stars >= 1 ? 'star' : 'staro'}
-                    size={30}
-                    color="#ccc"
-                />
-                <Icon
-                    name={user.stars >= 2 ? 'star' : 'staro'}
-                    size={30}
-                    color="#ccc"
-                />
-                <Icon
-                    name={user.stars >= 3 ? 'star' : 'staro'}
-                    size={30}
-                    color="#ccc"
-                />
-                <Icon
-                    name={user.stars >= 4 ? 'star' : 'staro'}
-                    size={30}
-                    color="#ccc"
-                />
-                <Icon
-                    name={user.stars >= 5 ? 'star' : 'staro'}
-                    size={30}
-                    color="#ccc"
-                />
+            <View style={profileStyles.container}>
+                <Icon2 name="account-circle" size={200} />
+                <Stars starCount={user.stars} />
+                <Text>{user.name}</Text>
+                <Text>{user.bio}</Text>
             </View>
-            <Text>{user.name}</Text>
-            <Text>{user.bio}</Text>
-        </View>
+        </>
     );
 };
 

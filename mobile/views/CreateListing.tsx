@@ -1,8 +1,8 @@
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {Button, Text, TextInput, View} from 'react-native';
+import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import Nav from '../components/Nav';
-import {formStyles} from './Register';
+import {buttonStyles, formStyles} from '../helpers/styles';
 
 const CreateListing = () => {
     const {
@@ -14,11 +14,12 @@ const CreateListing = () => {
     const onSubmit = (data: any) => {
         console.log(data);
     };
+
     return (
         <View>
-            <View>
-                <Nav />
-                <Text>Title</Text>
+            <Nav />
+            <View style={formStyles.container}>
+                <Text style={formStyles.title}>New Posting</Text>
                 <Controller
                     control={control}
                     rules={{
@@ -33,13 +34,13 @@ const CreateListing = () => {
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            placeholder="title"
                         />
                     )}
                     name="title"
                     defaultValue=""
                 />
                 {errors.title && <Text>{errors.title.message}</Text>}
-                <Text>Description</Text>
                 <Controller
                     control={control}
                     rules={{
@@ -51,11 +52,11 @@ const CreateListing = () => {
                     }}
                     render={({field: {onChange, onBlur, value}}) => (
                         <TextInput
-                            secureTextEntry={true}
                             style={formStyles.input}
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            placeholder="description"
                         />
                     )}
                     name="description"
@@ -64,7 +65,6 @@ const CreateListing = () => {
                 {errors.description && (
                     <Text>{errors.description.message}</Text>
                 )}
-                <Text>Cost</Text>
                 <Controller
                     control={control}
                     rules={{
@@ -76,18 +76,22 @@ const CreateListing = () => {
                     }}
                     render={({field: {onChange, onBlur, value}}) => (
                         <TextInput
-                            secureTextEntry={true}
                             style={formStyles.input}
                             onBlur={onBlur}
                             onChangeText={onChange}
                             value={value}
+                            placeholder="cost"
                         />
                     )}
                     name="cost"
                     defaultValue=""
                 />
                 {errors.cost && <Text>{errors.cost.message}</Text>}
-                <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+                <TouchableOpacity
+                    onPress={handleSubmit(onSubmit)}
+                    style={buttonStyles.buttonFilled}>
+                    <Text style={buttonStyles.buttonFilledText}>Create</Text>
+                </TouchableOpacity>
             </View>
         </View>
     );

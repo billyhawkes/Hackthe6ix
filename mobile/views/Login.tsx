@@ -1,9 +1,16 @@
 import React from 'react';
 import {Controller, useForm} from 'react-hook-form';
-import {Button, StyleSheet, Text, TextInput, View} from 'react-native';
+import {
+    Button,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
+} from 'react-native';
 import {Link, useHistory} from 'react-router-native';
 import {login} from '../helpers/auth';
-import {formStyles} from './Register';
+import {buttonStyles, formStyles} from '../helpers/styles';
 
 const Register = () => {
     const history = useHistory();
@@ -19,53 +26,60 @@ const Register = () => {
     };
 
     return (
-        <View>
+        <>
             <Button onPress={() => history.push('/')} title="Back" />
-            <Text>Email</Text>
-            <Controller
-                control={control}
-                rules={{
-                    required: {
-                        value: true,
-                        message: 'Field is required',
-                    },
-                }}
-                render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        style={formStyles.input}
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="email"
-                defaultValue=""
-            />
-            {errors.email && <Text>This is required.</Text>}
-            <Text>Password</Text>
-            <Controller
-                control={control}
-                rules={{
-                    required: {
-                        value: true,
-                        message: 'Field is required',
-                    },
-                    maxLength: 100,
-                }}
-                render={({field: {onChange, onBlur, value}}) => (
-                    <TextInput
-                        secureTextEntry={true}
-                        style={formStyles.input}
-                        onBlur={onBlur}
-                        onChangeText={onChange}
-                        value={value}
-                    />
-                )}
-                name="password"
-                defaultValue=""
-            />
-            <Button title="Submit" onPress={handleSubmit(onSubmit)} />
-        </View>
+            <View style={formStyles.container}>
+                <Controller
+                    control={control}
+                    rules={{
+                        required: {
+                            value: true,
+                            message: 'Field is required',
+                        },
+                    }}
+                    render={({field: {onChange, onBlur, value}}) => (
+                        <TextInput
+                            style={formStyles.input}
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                            placeholder="email"
+                        />
+                    )}
+                    name="email"
+                    defaultValue=""
+                />
+                {errors.email && <Text>{errors.email.message}</Text>}
+                <Controller
+                    control={control}
+                    rules={{
+                        required: {
+                            value: true,
+                            message: 'Field is required',
+                        },
+                        maxLength: 100,
+                    }}
+                    render={({field: {onChange, onBlur, value}}) => (
+                        <TextInput
+                            secureTextEntry={true}
+                            style={formStyles.input}
+                            onBlur={onBlur}
+                            onChangeText={onChange}
+                            value={value}
+                            placeholder="password"
+                        />
+                    )}
+                    name="password"
+                    defaultValue=""
+                />
+                {errors.password && <Text>{errors.password.message}</Text>}
+                <TouchableOpacity
+                    onPress={handleSubmit(onSubmit)}
+                    style={buttonStyles.buttonFilled}>
+                    <Text style={buttonStyles.buttonFilledText}>Login</Text>
+                </TouchableOpacity>
+            </View>
+        </>
     );
 };
 

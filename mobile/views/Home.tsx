@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-    Button,
-    Image,
-    StyleSheet,
-    Text,
-    TouchableOpacity,
-    View,
-} from 'react-native';
-import {Link, useHistory} from 'react-router-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {useHistory} from 'react-router-native';
+import {buttonStyles} from '../helpers/styles';
 
 const Home = () => {
     const history = useHistory();
@@ -21,16 +15,15 @@ const Home = () => {
                 style={styles.logo}
                 source={require('../media/helpinghand.png')}
             />
-
             <TouchableOpacity
-                style={styles.registerButton}
+                style={buttonStyles.buttonFilled}
                 onPress={() => history.push('/register')}>
-                <Text style={styles.registerText}>Register</Text>
+                <Text style={buttonStyles.buttonFilledText}>Register</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                style={styles.loginButton}
+                style={buttonStyles.buttonHollowed}
                 onPress={() => history.push('/login')}>
-                <Text style={styles.loginText}>Login</Text>
+                <Text style={buttonStyles.buttonHollowedText}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => history.push('/profile')}>
                 <Text>Profile</Text>
@@ -63,40 +56,6 @@ const styles = StyleSheet.create({
         marginTop: 30,
         height: 75,
         width: 65,
-    },
-    loginButton: {
-        marginTop: 30,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        color: '#3AAED8',
-        width: 230,
-        height: 40,
-        textAlign: 'center',
-        backgroundColor: '#F2F2F2',
-        borderStyle: 'solid',
-        borderColor: '#3AAED8',
-        borderWidth: 3,
-        borderRadius: 20,
-    },
-    registerButton: {
-        marginTop: 50,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        width: 230,
-        height: 40,
-        textAlign: 'center',
-        backgroundColor: '#3AAED8',
-        borderRadius: 20,
-    },
-    loginText: {
-        color: '#3AAED8',
-        fontWeight: 'bold',
-    },
-    registerText: {
-        color: '#F2F2F2',
-        fontWeight: 'bold',
     },
 });
 

@@ -25,13 +25,13 @@ interface loginBody {
     password: string;
 }
 export const login = async (loginBody: loginBody) => {
-    try {
-        const res = await axios.post('/login', loginBody);
-        const data = await res.data;
-        await AsyncStorage.setItem('user_id', data.user_id);
-    } catch (err) {
-        console.log('Login error');
-    }
+    // try {
+    //     const res = await axios.post('/login', loginBody);
+    //     const data = await res.data;
+    //     await AsyncStorage.setItem('user_id', data.user_id);
+    // } catch (err) {
+    //     console.log('Login error');
+    // }
 };
 
 export const getProfile = async () => {
