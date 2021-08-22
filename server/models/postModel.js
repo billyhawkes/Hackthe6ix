@@ -9,9 +9,10 @@ const PostSchema = new Schema({
     category: { type: String, required: true },
     description: { type: String, required: true },
     cost: { type: Number, required: true },
-    userId: { type: String, required: true},
-    userName: { type: String, required: true},
+    userId: { type: String, required: true },
+    userName: { type: String, required: true },
 });
 
 const Post = mongoose.model("posts", PostSchema);
+
 export default Post;

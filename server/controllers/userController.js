@@ -31,10 +31,11 @@ export const auth = async (req, res, next) => {
 
 // Register
 router.post("/register", async (req, res) => {
-    const { email, firstName, lastName, birthday, password, passwordCheck } = req.body;
+    const { email, firstName, lastName, birthday, password, passwordCheck } =
+        req.body;
 
     // Not all fields
-    if (!email || !firstName || !lastName || !birthday|| !password)
+    if (!email || !firstName || !lastName || !birthday || !password)
         return res.status(400).json({ msg: "Not all fields filled" });
     // Email exists
     const emailExists = await User.findOne({ email });
@@ -105,25 +106,24 @@ router.post("/validToken", async (req, res) => {
     return res.json(true);
 });
 
-// TODO: Implement a way to update bio 
+// TODO: Implement a way to update bio
 router.get("/profile", async (req, res) => {
     const user = await User.findById(req.user);
 
     res.json({
         name: user.firstName + " " + user.lastName,
         bio: user.bio,
-        stars: 3
+        stars: 3,
     });
 });
 
-
 router.get("/profile/:tagId", async (req, res) => {
-    const user = await User.findById(req.params.tagId) 
+    const user = await User.findById(req.params.tagId);
 
     res.json({
         name: user.firstName + " " + user.lastName,
         bio: user.bio,
-        stars: 3
+        stars: 3,
     });
 });
 

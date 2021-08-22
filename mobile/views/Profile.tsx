@@ -1,8 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {useEffect, useState} from 'react';
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
-import Icon2 from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useHistory} from 'react-router-native';
 import Nav from '../components/Nav';
 import Stars from '../components/Stars';
@@ -30,10 +29,9 @@ const Profile = () => {
 
     return (
         <>
-            <Nav />
             <View style={profileStyles.container}>
                 {/* <Image source={}/> */}
-                <Icon2 name="account-circle" size={200} />
+                <Icon name="account-circle" size={200} />
                 <Text>{profile.name}</Text>
                 <Stars starCount={profile.stars} />
                 <Text style={profileStyles.description}>{profile.bio}</Text>
@@ -45,6 +43,7 @@ const Profile = () => {
                     color={'#3AAED8'}
                     title="Logout"></Button>
             </View>
+            <Nav />
         </>
     );
 };

@@ -1,43 +1,42 @@
 import express from "express";
 const router = express.Router();
-import {auth} from './userController.js'
+import { auth } from "./userController.js";
 
 // Models
 import Post from "../models/postModel.js";
 import User from "../models/userModel.js";
 
 // Home Feed
-router.get('/feed', async(req, res) => {
-    
-});
-
+router.get("/feed", async (req, res) => {});
 
 // Creating a New Post
-router.post('/new', auth, async(req, res) => {
+router.post("/new", auth, async (req, res) => {
     const { title, category, description, cost } = req.body;
     const user = await User.findById(req.user);
 
     // Not all fields
-    if (!title || !category || !description || !cost|| !userId)
+    if (!title || !category || !description || !cost || !userId)
         return res.status(400).json({ msg: "Not all fields filled" });
 
-    
     const newPost = new Post({
         title,
         category,
         description,
         cost,
         userId,
-        userName: user.firstName + " " + user.lastName, 
+        userName: user.firstName + " " + user.lastName,
     });
-    
-        newPost.save();
-    
-        res.json({ userId: user._id , userName: user.firstName + " " + user.lastName});
+
+    newPost.save();
+
+    res.json({
+        userId: user._id,
+        userName: user.firstName + " " + user.lastName,
+    });
 });
 
 router.get("/:tagId", async (req, res) => {
-    const post = await Post.findById(req.params.tagId) 
+    const post = await Post.findById(req.params.tagId);
 
     res.json({
         title: post.title,
@@ -49,14 +48,15 @@ router.get("/:tagId", async (req, res) => {
 });
 
 router.delete("/:tagId", async (req, res) => {
-    db.collection('post').findOneAndDelete({_id: req.params.tagId}, 
+    db.collection("post").findOneAndDelete(
+        { _id: req.params.tagId },
 
-    (err, result) => {
-        if (err) 
-            return res.send(500, err);
-        console.log('got deleted');
-        res.redirect('/feed');
-    });
+        (err, result) => {
+            if (err) return res.send(500, err);
+            console.log("got deleted");
+            res.redirect("/feed");
+        }
+    );
 });
 
-export default router
+export default router;
