@@ -111,7 +111,8 @@ router.get("/profile", async (req, res) => {
     const user = await User.findById(req.user);
 
     res.json({
-        name: user.firstName + " " + user.lastName,
+        firstName,
+        lastName,
         bio: user.bio,
         stars: 3,
     });
