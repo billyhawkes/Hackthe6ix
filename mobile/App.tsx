@@ -18,14 +18,12 @@ import Profile from './views/Profile';
 import Feed from './views/Feed';
 import CreateListing from './views/CreateListing';
 import User from './views/User';
+import {AnimatedSwitch} from 'react-router-transition';
+import Listing from './views/Listing';
 
 const App = () => {
     return (
         <NativeRouter>
-            <SafeAreaView>
-                <StatusBar />
-                <ScrollView contentInsetAdjustmentBehavior="automatic"></ScrollView>
-            </SafeAreaView>
             <Route exact path="/">
                 <Home />
             </Route>
@@ -44,8 +42,11 @@ const App = () => {
             <Route path="/feed">
                 <Feed />
             </Route>
-            <Route path="/listing/create">
+            <Route exact path="/listing/create">
                 <CreateListing />
+            </Route>
+            <Route exact path="/listing/:id">
+                <Listing />
             </Route>
         </NativeRouter>
     );

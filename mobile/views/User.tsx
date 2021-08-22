@@ -37,13 +37,13 @@ const User = () => {
 
     return (
         <>
-            <Nav />
             <View style={profileStyles.container}>
                 <Icon2 name="account-circle" size={200} />
                 <Stars starCount={user.stars} />
                 <Text>{user.name}</Text>
                 <Text>{user.bio}</Text>
             </View>
+            <Nav />
         </>
     );
 };

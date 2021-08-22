@@ -46,7 +46,7 @@ export const formStyles = StyleSheet.create({
         color: 'black',
         borderColor: '#cccccc',
         borderWidth: 1,
-        width: 250,
+        width: 300,
         marginTop: 15,
         paddingLeft: 15,
         paddingRight: 15,

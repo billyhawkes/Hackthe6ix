@@ -17,7 +17,7 @@ const Home = () => {
             />
             <TouchableOpacity
                 style={buttonStyles.buttonFilled}
-                onPress={() => history.push('/register')}>
+                onPress={() => history.push('/register/start')}>
                 <Text style={buttonStyles.buttonFilledText}>Register</Text>
             </TouchableOpacity>
             <TouchableOpacity

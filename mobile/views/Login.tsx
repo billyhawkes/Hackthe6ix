@@ -21,14 +21,16 @@ const Register = () => {
     } = useForm();
 
     const onSubmit = (data: any) => {
-        login(data);
-        console.log(data);
+        login(data)
+            .then(() => history.push('/feed'))
+            .catch(() => console.log('login error'));
     };
 
     return (
         <>
             <Button onPress={() => history.push('/')} title="Back" />
             <View style={formStyles.container}>
+                <Text style={formStyles.title}>Login</Text>
                 <Controller
                     control={control}
                     rules={{

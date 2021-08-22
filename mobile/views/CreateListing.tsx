@@ -16,84 +16,89 @@ const CreateListing = () => {
     };
 
     return (
-        <View>
-            <Nav />
-            <View style={formStyles.container}>
-                <Text style={formStyles.title}>New Posting</Text>
-                <Controller
-                    control={control}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: 'Field is required',
-                        },
-                    }}
-                    render={({field: {onChange, onBlur, value}}) => (
-                        <TextInput
-                            style={formStyles.input}
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value}
-                            placeholder="title"
-                        />
+        <>
+            <View>
+                <View style={formStyles.container}>
+                    <Text style={formStyles.title}>New Posting</Text>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: {
+                                value: true,
+                                message: 'Field is required',
+                            },
+                        }}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <TextInput
+                                style={formStyles.input}
+                                onBlur={onBlur}
+                                onChangeText={onChange}
+                                value={value}
+                                placeholder="title"
+                            />
+                        )}
+                        name="title"
+                        defaultValue=""
+                    />
+                    {errors.title && <Text>{errors.title.message}</Text>}
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: {
+                                value: true,
+                                message: 'Field is required',
+                            },
+                            maxLength: 100,
+                        }}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <TextInput
+                                style={formStyles.input}
+                                onBlur={onBlur}
+                                onChangeText={onChange}
+                                value={value}
+                                placeholder="description"
+                            />
+                        )}
+                        name="description"
+                        defaultValue=""
+                    />
+                    {errors.description && (
+                        <Text>{errors.description.message}</Text>
                     )}
-                    name="title"
-                    defaultValue=""
-                />
-                {errors.title && <Text>{errors.title.message}</Text>}
-                <Controller
-                    control={control}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: 'Field is required',
-                        },
-                        maxLength: 100,
-                    }}
-                    render={({field: {onChange, onBlur, value}}) => (
-                        <TextInput
-                            style={formStyles.input}
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value}
-                            placeholder="description"
-                        />
-                    )}
-                    name="description"
-                    defaultValue=""
-                />
-                {errors.description && (
-                    <Text>{errors.description.message}</Text>
-                )}
-                <Controller
-                    control={control}
-                    rules={{
-                        required: {
-                            value: true,
-                            message: 'Field is required',
-                        },
-                        maxLength: 100,
-                    }}
-                    render={({field: {onChange, onBlur, value}}) => (
-                        <TextInput
-                            style={formStyles.input}
-                            onBlur={onBlur}
-                            onChangeText={onChange}
-                            value={value}
-                            placeholder="cost"
-                        />
-                    )}
-                    name="cost"
-                    defaultValue=""
-                />
-                {errors.cost && <Text>{errors.cost.message}</Text>}
-                <TouchableOpacity
-                    onPress={handleSubmit(onSubmit)}
-                    style={buttonStyles.buttonFilled}>
-                    <Text style={buttonStyles.buttonFilledText}>Create</Text>
-                </TouchableOpacity>
+                    <Controller
+                        control={control}
+                        rules={{
+                            required: {
+                                value: true,
+                                message: 'Field is required',
+                            },
+                            maxLength: 100,
+                        }}
+                        render={({field: {onChange, onBlur, value}}) => (
+                            <TextInput
+                                style={formStyles.input}
+                                onBlur={onBlur}
+                                onChangeText={onChange}
+                                value={value}
+                                placeholder="cost"
+                            />
+                        )}
+                        name="cost"
+                        defaultValue=""
+                    />
+                    {errors.cost && <Text>{errors.cost.message}</Text>}
+                    <TouchableOpacity
+                        onPress={handleSubmit(onSubmit)}
+                        style={buttonStyles.buttonFilled}>
+                        <Text style={buttonStyles.buttonFilledText}>
+                            Create
+                        </Text>
+                    </TouchableOpacity>
+                </View>
             </View>
-        </View>
+
+            <Nav />
+        </>
     );
 };
 
