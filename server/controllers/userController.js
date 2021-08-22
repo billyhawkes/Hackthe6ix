@@ -31,10 +31,10 @@ const auth = async (req, res, next) => {
 
 // Register
 router.post("/register", async (req, res) => {
-    const { email, firstName, lastName, password, passwordCheck } = req.body;
+    const { email, firstName, lastName, birthday, password, passwordCheck } = req.body;
 
     // Not all fields
-    if (!email || !firstName || !lastName || !password)
+    if (!email || !firstName || !lastName || !birthday|| !password)
         return res.status(400).json({ msg: "Not all fields filled" });
     // Email exists
     const emailExists = await User.findOne({ email });
@@ -58,6 +58,7 @@ router.post("/register", async (req, res) => {
         email,
         firstName,
         lastName,
+        birthday,
         password: hashedPassword,
     });
 
@@ -104,12 +105,25 @@ router.post("/validToken", async (req, res) => {
     return res.json(true);
 });
 
-router.get("/", auth, async (req, res) => {
+// TODO: Implement a way to update bio 
+router.get("/profile", async (req, res) => {
     const user = await User.findById(req.user);
 
     res.json({
-        id: user._id,
-        username: user.username,
+        name: user.firstName + " " + user.lastName,
+        bio: user.bio,
+        stars: 3
+    });
+});
+
+
+route.get("/profile/:tagId", async (req, res) => {
+    const user = await User.findById(req.params.tagId) 
+
+    res.json({
+        name: user.firstName + " " + user.lastName,
+        bio: user.bio,
+        stars: 3
     });
 });
 

@@ -6,7 +6,7 @@ import User from "../models/postModel.js";
 
 //Feed
 router.get('/feed', async(req, res, next) => {
-
+    
 });
 
 
