@@ -7,7 +7,10 @@ import Post from "../models/postModel.js";
 import User from "../models/userModel.js";
 
 // Home Feed
-router.get("/feed", async (req, res) => {});
+router.get("/feed", async (req, res) => {
+    const posts = await Post.find({});
+    res.json(posts);
+});
 
 // Creating a New Post
 router.post("/new", auth, async (req, res) => {
@@ -15,7 +18,7 @@ router.post("/new", auth, async (req, res) => {
     const user = await User.findById(req.user);
 
     // Not all fields
-    if (!title || !category || !description || !cost || !userId)
+    if (!title || !category || !description || !cost)
         return res.status(400).json({ msg: "Not all fields filled" });
 
     const newPost = new Post({
@@ -48,8 +51,8 @@ router.get("/:tagId", async (req, res) => {
     });
 });
 
-router.delete("/:tagId", async (req, res) => {
-    db.collection("post").findOneAndDelete(
+router.delete("/:tagId", auth, async (req, res) => {
+    Post.findOneAndDelete(
         { _id: req.params.tagId },
 
         (err, result) => {
