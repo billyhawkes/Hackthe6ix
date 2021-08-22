@@ -23,7 +23,7 @@ router.post("/new", auth, async (req, res) => {
         category,
         description,
         cost,
-        userId,
+        userId: user._id,
         userName: user.firstName + " " + user.lastName,
     });
 
