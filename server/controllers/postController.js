@@ -43,7 +43,8 @@ router.get("/:tagId", async (req, res) => {
         category: post.category,
         description: post.description,
         cost: post.cost,
-        user: post.user._id, // returns the id of the user instead of user
+        userId: post.user._id,
+        userName: post.user.firstName + " " + post.user.lastName,
     });
 });
 
