@@ -1,14 +1,62 @@
 import express from "express";
 const router = express.Router();
+import {auth} from './userController.js'
 
 // Models
-import User from "../models/postModel.js";
+import Post from "../models/postModel.js";
+import User from "../models/userModel.js";
 
-//Feed
-router.get('/feed', async(req, res, next) => {
+// Home Feed
+router.get('/feed', async(req, res) => {
     
 });
 
 
+// Creating a New Post
+router.post('/new', auth, async(req, res) => {
+    const { title, category, description, cost } = req.body;
+    const user = await User.findById(req.user);
+
+    // Not all fields
+    if (!title || !category || !description || !cost|| !userId)
+        return res.status(400).json({ msg: "Not all fields filled" });
+
+    
+    const newPost = new Post({
+        title,
+        category,
+        description,
+        cost,
+        userId,
+        userName: user.firstName + " " + user.lastName, 
+    });
+    
+        newPost.save();
+    
+        res.json({ userId: user._id , userName: user.firstName + " " + user.lastName});
+});
+
+router.get("/:tagId", async (req, res) => {
+    const post = await Post.findById(req.params.tagId) 
+
+    res.json({
+        title: post.title,
+        category: post.category,
+        description: post.description,
+        cost: post.cost,
+        user: post.user._id, // returns the id of the user instead of user
+    });
+});
+
+router.delete("/:tagId", async (req, res) => {
+    db.collection('post').findOneAndDelete({_id: req.params.tagId}, 
+
+    (err, result) => {
+        if (err) 
+            return res.send(500, err);
+        console.log('got deleted');
+        res.redirect('/feed');
+    });
+});
 
 export default router

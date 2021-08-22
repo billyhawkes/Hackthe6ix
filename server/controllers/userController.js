@@ -8,7 +8,7 @@ import jwt from "jsonwebtoken";
 import User from "../models/userModel.js";
 
 // Middleware
-const auth = async (req, res, next) => {
+export const auth = async (req, res, next) => {
     try {
         // Token Accepted
         const token = req.header("auth-token");
@@ -64,7 +64,7 @@ router.post("/register", async (req, res) => {
 
     const user = await newUser.save();
 
-    res.json({ username: user.username, id: user._id });
+    res.json({ id: user._id });
 });
 
 router.post("/login", async (req, res) => {
@@ -83,7 +83,7 @@ router.post("/login", async (req, res) => {
             return res.status(400).json({ msg: "Password Incorrect" });
         // Create JWT
         const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-        res.json({ token, user: { id: user._id, username: user.username } });
+        res.json({ token, user: { id: user._id } });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -117,7 +117,7 @@ router.get("/profile", async (req, res) => {
 });
 
 
-route.get("/profile/:tagId", async (req, res) => {
+router.get("/profile/:tagId", async (req, res) => {
     const user = await User.findById(req.params.tagId) 
 
     res.json({
